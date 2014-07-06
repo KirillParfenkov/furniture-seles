@@ -1,0 +1,14 @@
+{
+  "name": "restNode",
+  "description": "rest api server",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "4.x",
+    "body-parser": "1.4.x",
+    "serve-static" : "1.x",
+    "method-override": "2.x",
+    "nconf" : "x",
+    "mysql" : "2.x"
+  }
+}

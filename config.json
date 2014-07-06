@@ -1,0 +1,11 @@
+{
+	"port": 1337,
+	"database" : {
+		"uri" : "188.226.143.131",
+		"name" : "furniture",
+		"user" : "root",
+		"password" : "erbnruqp",
+		"connectionLimit" : 10,
+		"port" : "3306"
+	}
+}
