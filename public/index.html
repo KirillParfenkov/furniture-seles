@@ -1,9 +1,76 @@
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-<head>
-	<title>Furniture</title>
-</head>
-<body>
-	<h1> Furniture </h1>	
-</body>
+	<head>
+		<title>Furniture</title>
+		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	</head>
+	<style>
+		body {
+			margin : 0 auto;
+			width: 1100px;
+		}
+
+		nav {
+			margin: 0 auto;
+			width: 600px;
+		}
+
+		.sabmenuContainer {
+			background-color: rgba(224, 222, 220, 0.5);
+			border: 0px solid;
+			border-radius: 2px;
+			padding: 5px;
+		}
+
+		.sabmenuContainer ul {
+    		list-style-type: none;
+    		padding: 0px;
+    		margin: 0px;
+		}
+
+		.sabmenuContainer.active {
+		}	
+
+	</style>
+	<script>
+		$( function() {
+
+			var renderMenuItem = function( itemCount, itemSize, padding, callbak ) {	
+				$('.sabmenuContainer').addClass('active');
+				$('.sabmenuContainer').animate({ height: (itemCount * itemSize + padding) }, 500, "linear", callbak);
+			};
+
+			var hideSubmenuContainer = function( callbak ) {
+				$('.sabmenuContainer').removeClass('active');
+				$('.sabmenuContainer').animate( { height: 0 }, 100, "linear", callbak );
+			};
+
+			$('a').click( function() {
+				renderMenuItem(4, 19, 0, function() {
+					console.log('Test!');
+				});
+			});
+
+			$('.sabmenuContainer').click( function() {
+				$('.sabmenuContainer').html('');
+				hideSubmenuContainer();
+			});
+
+		});
+	</script>
+	<body>
+		<header>
+			<h1>Main Header</h1>
+		</header>
+		<nav>
+			<a href="#">Test Link 1</a> |
+			<a href="#">Test Link 2</a> |
+			<a href="#">Test Link 3</a> |
+			<a href="#">Test Link 4</a>
+		</nav>
+		<hr />
+		<div class="sabmenuContainer">
+
+		</div>
+	</body>
 </html>
