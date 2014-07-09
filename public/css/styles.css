@@ -1,0 +1,48 @@
+body {
+	margin : 0 auto;
+	width: 1100px;
+}
+
+nav {
+	margin: 0 auto;
+	width: 600px;
+}
+
+nav .menu a:link {
+	color: #000000;
+}
+
+nav .menu a:visited {
+	color: #000000;
+}
+
+.sabmenuContainer {
+	background-color: rgba(224, 222, 220, 0.5);
+	border: 0px solid;
+	border-radius: 2px;
+	padding: 5px;
+	color: 000;
+}
+
+.sabmenuContainer a:link{
+	color: #000000;
+}
+
+.sabmenuContainer a:visited{
+	color: #000000;
+}
+
+.sabmenuContainer ul {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.sabmenuContainer.active {
+}
+
+.sabmenuContainer .submenuSection {
+	padding-left: 10px;
+	float: left;
+}
+

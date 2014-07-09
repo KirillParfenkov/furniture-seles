@@ -9,64 +9,15 @@
 		<script data-main="script/main" src="script/libs/require/require.js"></script>
 	</head>
 	<style>
-		body {
-			margin : 0 auto;
-			width: 1100px;
-		}
-
-		nav {
-			margin: 0 auto;
-			width: 600px;
-		}
-
-		.sabmenuContainer {
-			background-color: rgba(224, 222, 220, 0.5);
-			border: 0px solid;
-			border-radius: 2px;
-			padding: 5px;
-		}
-
-		.sabmenuContainer ul {
-    		list-style-type: none;
-    		padding: 0px;
-    		margin: 0px;
-		}
-
-		.sabmenuContainer.active {
-		}	
 
 	</style>
 	<script>
-		$( function() {
-
-			var renderMenuItem = function( itemCount, itemSize, padding, callbak ) {	
-				$('.sabmenuContainer').addClass('active');
-				$('.sabmenuContainer').animate({ height: (itemCount * itemSize + padding) }, 500, "linear", callbak);
-			};
-
-			var hideSubmenuContainer = function( callbak ) {
-				$('.sabmenuContainer').removeClass('active');
-				$('.sabmenuContainer').animate( { height: 0 }, 100, "linear", callbak );
-			};
-
-			$('a').click( function() {
-				renderMenuItem(4, 19, 0, function() {
-					console.log('Test!');
-				});
-			});
-
-			$('.sabmenuContainer').click( function() {
-				$('.sabmenuContainer').html('');
-				hideSubmenuContainer();
-			});
-
-		});
 	</script>
 	<body>
 		<header>
 			<h1>Main Header</h1>
 		</header>
-		<nav>
+		<nav class="menu">
 			<a href="#/clak/asdasd">Test Link 1</a> |
 			<a href="#/clak/asdasd2">Test Link 2</a> |
 			<a href="#/clak/3">Test Link 3</a> |
@@ -75,6 +26,8 @@
 		<hr />
 		<div class="sabmenuContainer">
 
+		</div>
+		<div class="contentContainer">
 		</div>
 	</body>
 </html>
