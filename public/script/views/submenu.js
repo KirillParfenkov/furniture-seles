@@ -9,28 +9,124 @@ define([
 		template : contentTemplate,
 		hierarchy : null,
 
-		prepare : function ( src, callback ) {
-			var categories = src.categories;
-			this.hierarchy = [];
-
-			for( var i = 0; i < categories.length; i++ ) {
-				var catName = 'category' + i;
-				this.hierarchy.push([
-					{ link: '#', name: catName + '1', label: catName + '1', active: (catName + '1') == categories[i] },
-					{ link: '#', name: catName + '2', label: catName + '2', active: (catName + '2') == categories[i] },
-					{ link: '#', name: catName + '3', label: catName + '3', active: (catName + '3') == categories[i] },
-					{ link: '#', name: catName + '4', label: catName + '4', active: (catName + '4') == categories[i] },
-					{ link: '#', name: catName + '5', label: catName + '5', active: (catName + '5') == categories[i] },
-				]);
-			}
-			
-			callback( this.hierarchy );
-		},
-
 		render : function ( src, callback ) {
 			var view = this;
-			$(this.el).html(_.template(contentTemplate, { hierarchy: view.hierarchy }));
-		}
+			var categories = src.categories;
+			var hierarchy = [];
+			var categoryId = src.categoryId;
+
+			var categoriesVar = [
+				{
+					id : 1,
+					name : 'Test 1'
+				},
+				{
+					id : 2,
+					name : 'Test 2'
+				},
+				{
+					id : 3,
+					name : 'Test 3'
+				},
+				{
+					id : 4,
+					parentId : 1,
+					name : 'Sub 1'
+				},
+				{
+					id : 5,
+					parentId : 1,
+					name : 'Sub 2'
+				},
+				{
+					id : 6,
+					name : 'T 1',
+					parentId : 4,
+				},
+				{
+					id : 7,
+					name : 'T 2',
+					parentId : 4
+				},
+				{
+					id : 8,
+					name : 'T 3',
+					parentId : 4
+				},
+				{
+					id : 9,
+					name : 'T 11',
+					parentId : 4
+				},
+				{
+					id : 10,
+					parentId : 4,
+					name : 'T 22'
+				}
+			];
+
+			var categoryTreeMap = {};
+			var firstLavel = [];
+
+			for( var i = 0; i < categoriesVar.length; i++  ) {
+				categoryTreeMap[ categoriesVar[i].id ] = {
+					id: categoriesVar[i].id,
+					label : categoriesVar[i].name,
+					parentId : categoriesVar[i].parentId,
+					data : []
+				};
+			}
+
+			for( var i = 0; i < categoriesVar.length; i++  ) {
+				if ( categoriesVar[i].parentId ) {
+					categoryTreeMap[ categoriesVar[i].parentId ].data.push( categoryTreeMap[categoriesVar[i].id] );
+				} else {
+					firstLavel.push( categoryTreeMap[categoriesVar[i].id] );
+				}
+			}
+
+			if ( categoryId ) {
+				if ( categoryTreeMap[categoryId].data ) {
+				hierarchy.push( categoryTreeMap[categoryId].data );
+				}
+
+				var parentId = categoryTreeMap[categoryId].parentId;
+				while ( parentId ) {
+					var currentNode = categoryTreeMap[parentId];
+					if ( currentNode.data && currentNode.data.length > 0) {
+						hierarchy.push( currentNode.data );
+					}
+					parentId = currentNode.parentId;
+				}
+			}
+
+			hierarchy.push( firstLavel );
+			hierarchy.reverse();
+
+		    var itemCount = 0;
+        	for( var i = 0; i < hierarchy.length; i++) {
+          		if ( itemCount < hierarchy[i].length ) {
+            		itemCount = hierarchy[i].length;
+          		}
+        	}
+
+		    view.renderSubmenuContainer( itemCount, 19, 5,  function() {
+          		$(view.el).html(_.template(contentTemplate, { hierarchy: hierarchy }));
+          		if ( callback ) {
+					callback();
+				}
+        	});
+		},
+
+		renderSubmenuContainer : function( itemCount, itemSize, padding, callbak ) {  
+      		$('.sabmenuContainer').addClass('active');
+      		$('.sabmenuContainer').animate({ height: (itemCount * itemSize + padding) }, 500, "linear", callbak);
+    	},
+
+    	hideSubmenuContainer : function( callbak ) {
+      		$('.sabmenuContainer').removeClass('active');
+      		$('.sabmenuContainer').animate( { height: 0 }, 100, "linear", callbak );
+    	}
 	});
 	return ContentView;
 });

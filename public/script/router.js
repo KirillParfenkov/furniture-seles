@@ -11,8 +11,10 @@ define([
     tabViewMap : {},
     sideBar : {},
     setupViews : [],
+    catalogueTree : [],
     routes: {
-      'catalogue/*path' : 'renderCatalogue',
+      'catalogue/:categoryId' : 'renderCatalogue',
+      'catalogue' : 'renderCatalogue',
       'shares' : 'renderShares',
       'novelties' : 'renderNovelties',
       'contacts' : 'renderContacts',
@@ -25,23 +27,10 @@ define([
       callback();
     },
 
-    renderCatalogue : function ( path ) {
-      var router = this;
-      var views = this.views;
-      var categories = path.split("/");
+    renderCatalogue : function ( categoryId ) {
+
       var id = this.getURLParameter('id');
-      //views['content'].render({ categories : categories, id : id });
-      views['submenu'].prepare({ categories : categories}, function( hierarchy ) {
-        var itemCount = 0;
-        for( var i = 0; i < hierarchy.length; i++) {
-          if ( itemCount < hierarchy[i].length ) {
-            itemCount = hierarchy[i].length;
-          }
-        }
-        router.renderMenuItem( itemCount, 19, 5,  function() {
-          views['submenu'].render();
-        });
-      });
+      this.views['submenu'].render( { categoryId : categoryId } );
     },
 
     renderShares : function () {
