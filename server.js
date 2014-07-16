@@ -29,6 +29,7 @@ var deleteRequest = 'DELETE FROM ?? WHERE id = ?';
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(serveStatic('public'));
+app.use(serveStatic('D:\\Work Space\\workspace6\\simpleJ\\files'));
 app.use(methodOverride());
 app.use(function(req, res, next) {
 	console.log(req.headers.origin);
