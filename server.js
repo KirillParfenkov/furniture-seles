@@ -6,6 +6,7 @@ var serveStatic = require('serve-static');
 var methodOverride = require('method-override');
 var nconf = require('nconf');
 var mysql = require('mysql');
+var async = require('async');
 
 nconf.argv()
 	.env()
@@ -29,7 +30,7 @@ var deleteRequest = 'DELETE FROM ?? WHERE id = ?';
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(serveStatic('public'));
-app.use(serveStatic('D:\\Work Space\\workspace6\\simpleJ\\files'));
+app.use(serveStatic('G:\\Kiryl Parfiankou\\Work\\Lynx\\files'));
 app.use(methodOverride());
 app.use(function(req, res, next) {
 	console.log(req.headers.origin);
@@ -94,6 +95,53 @@ app.delete('/api/:table/:id', function(req, res) {
 		} else {
 			res.json( result );
 		}
+	});
+});
+
+app.get('/furnituresByCategory/:categoryId', function( req, res ) {
+	pool.query('SELECT * FROM categoryFurnitureLinks WHERE `categoryId` = ?', [req.params.categoryId], function(err, result) {
+		if (err) throw err;
+		var furnitureIdList = [];
+		for ( var i = 0; i < result.length; i++ ) {
+			furnitureIdList.push(result[i].furnitureId);
+		}
+		if ( furnitureIdList.length ) {
+			async.parallel({
+				furnitures : function( finish ) {
+					var sqlRequest = 'SELECT * FROM furnitures WHERE `id` IN (?)';
+					pool.query( sqlRequest, [furnitureIdList], function( err, result ) {
+						if (err) throw err;
+						finish( null, result );
+						console.log();
+					});
+				},
+				furnitureIdFileMap : function( finish ) {
+					var sqlRequest = 'SELECT * FROM pictureFurnitureLinks WHERE `furnitureId` IN (?)';
+					pool.query( sqlRequest, [furnitureIdList], function( err, result ) {
+						if (err) throw err;
+
+						var furFileMap = {};
+						for ( var i = 0; i < result.length; i++ ) {
+							furFileMap[result[i].furnitureId] = furFileMap[result[i].furnitureId] || [];
+							furFileMap[result[i].furnitureId].push( result[i].pictureId );
+						}
+
+						finish( null, furFileMap );
+					});
+				}
+			}, function( err, results ) {
+				if (err) throw err;
+				var furnitures = results.furnitures;
+				var furnitureIdFileMap = results.furnitureIdFileMap;
+				for( var i = 0; i < furnitures.length; i++) {
+					furnitures[i].pictures = furnitureIdFileMap[furnitures[i].id];
+				}
+				res.json( furnitures );
+			});
+		} else {
+			res.json( [] );
+		}
+
 	});
 });
 

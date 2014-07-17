@@ -4,8 +4,10 @@ define([
   'underscore',
   'backbone',
   'views/content',
-  'views/submenu'
-], function ($, _, Backbone, contentView, submenuView) {
+  'views/submenu',
+  'views/categoryView',
+  'views/furnitureView'
+], function ($, _, Backbone, ContentView, SubmenuView, CategoryView, FurnitureView) {
   var AppRouter = Backbone.Router.extend({
     views : [],
     tabViewMap : {},
@@ -22,8 +24,10 @@ define([
     },
 
     initialize : function (options, callback) {
-      this.views['content'] = new contentView();
-      this.views['submenu'] = new submenuView();
+      this.views['content'] = new ContentView();
+      this.views['submenu'] = new SubmenuView();
+      this.views['categoryView'] = new CategoryView();
+      this.views['furnitureView'] = new FurnitureView();
       callback();
     },
 
@@ -31,6 +35,12 @@ define([
 
       var id = this.getURLParameter('id');
       this.views['submenu'].render( { categoryId : categoryId } );
+      if ( id ) {
+        console.log('id: ' + id);
+        this.views['furnitureView'].render( { id : id } );
+      } else {
+        this.views['categoryView'].render( { categoryId : categoryId } );
+      }
     },
 
     renderShares : function () {

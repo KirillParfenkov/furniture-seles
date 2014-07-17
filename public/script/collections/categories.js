@@ -6,7 +6,7 @@ define([
 ], function( $, _, Backbone, Category ) {
 	 var Categories = Backbone.Collection.extend({
 	 	models: Category,
-	 	url : 'http://localhost:1337/api/categories'
+	 	url : 'api/categories'
 	 });
 	 return Categories;
 });

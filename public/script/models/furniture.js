@@ -2,11 +2,11 @@ define(['jquery',
 		'underscore',
 		'backbone'
 ], function($, _, Backbone) {
-	var Category = Backbone.Model.extend({
-		urlRoot : 'api/categories',
+	var User = Backbone.Model.extend({
+		urlRoot : 'api/furnitures',
 		initialize: function(){
     	}
 	});
 
-	return Category;
+	return User;
 });

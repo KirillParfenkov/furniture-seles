@@ -5,8 +5,9 @@ define([
   'async',
   'models/category',
   'collections/categories',
-  'text!templates/submenu.html'
-], function ($, _, Backbone, async, Category, Categories, contentTemplate) {
+  'text!templates/submenu.html',
+  'collections/furnitures'
+], function ($, _, Backbone, async, Category, Categories, contentTemplate, Furnitures ) {
 	var ContentView = Backbone.View.extend({
 		el : '.sabmenuContainer',
 		template : contentTemplate,
@@ -17,7 +18,6 @@ define([
 			var hierarchy = [];
 			var categoryId = src.categoryId;
 
-			
 			var categoriesVar;
 
 			async.waterfall([

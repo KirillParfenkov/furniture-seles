@@ -9,6 +9,7 @@
     "serve-static" : "1.x",
     "method-override": "2.x",
     "nconf" : "x",
-    "mysql" : "2.x"
+    "mysql" : "2.x",
+    "async" : "x"
   }
 }
