@@ -25,7 +25,6 @@ define([
 					if ( callback ) callback( err );
 				}
 			});
-			$(view.el).html(_.template( view.template));
 		}
 
 	});

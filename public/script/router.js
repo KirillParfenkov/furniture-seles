@@ -36,7 +36,6 @@ define([
       var id = this.getURLParameter('id');
       this.views['submenu'].render( { categoryId : categoryId } );
       if ( id ) {
-        console.log('id: ' + id);
         this.views['furnitureView'].render( { id : id } );
       } else {
         this.views['categoryView'].render( { categoryId : categoryId } );
