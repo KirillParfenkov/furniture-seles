@@ -9,10 +9,16 @@
 					<tr>
 						<% _.each( row, function( furniture ){ %>
 							<td>
-								<a href="#/catalogue/<%= category.id %>?id=<%=furniture.id%>" ><%= furniture.label %></a>
-								<% if (avatarMap[furniture.id]) {%>
-									<img src="<%= avatarMap[furniture.id].path %>">
-								<% } %>
+								<div class="icon" >
+									<div class="header">
+										<a href="#/catalogue/<%= category.id %>?id=<%=furniture.id%>" ><%= furniture.label %></a>
+									</div>
+									<div class="body">
+										<% if (avatarMap[furniture.id]) {%>
+											<a href="#/catalogue/<%= category.id %>?id=<%=furniture.id%>"><img src="<%= avatarMap[furniture.id].path %>"></img></a>
+										<% } %>
+									</div>
+								</div>
 							</td>
 						<% }); %>
 					</tr>
