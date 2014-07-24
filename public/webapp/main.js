@@ -5,6 +5,7 @@ require.config({
     underscore: 'libs/underscore/underscore', // https://github.com/amdjs
     backbone: 'libs/backbone/backbone', // https://github.com/amdjs
     async: 'libs/async/async',
+    slick : 'libs/slick/slick.min',
 
     // Require.js plugins
     text: 'libs/require/text',

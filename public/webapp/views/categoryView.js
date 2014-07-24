@@ -37,8 +37,8 @@ define([
 										table[index] = [];
 									}
 
-									if ( furnituresVar[i].pictures && furnituresVar[i].pictures.length > 0 ) {
-										fileIdList.push( { avatarId : furnituresVar[i].pictures[0], furnitureId : furnituresVar[i].id } );
+									if ( furnituresVar[i].avatar && furnituresVar[i].pictures.length > 0 ) {
+										fileIdList.push( { avatarId : furnituresVar[i].avatar, furnitureId : furnituresVar[i].id } );
 										callList.push( function( finish ) {
 											var src = fileIdList.pop();
 											var file = new File( {id : src.avatarId} );

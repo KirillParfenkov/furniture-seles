@@ -1,6 +1,12 @@
 <div>
-	Furniture View
 	<% if ( furniture ) { %>
 		<h1><%= furniture.label %></h1>
+		<% if ( furniture.images && (furniture.images.length > 0)) { %>
+			<div class="furniture-slider">
+				<% _.each( furniture.images, function( image ) { %>
+					<div class="image"><img src="<%= image.path %>"></div>
+				<% });%>
+			</div>
+		<% } %>
 	<% } %> 
 </div>
