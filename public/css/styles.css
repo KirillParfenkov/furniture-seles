@@ -74,3 +74,15 @@ nav .menu a:visited {
 	color: #000;
 }
 
+.furniture-slider .slick-prev:before{
+	color : #000;
+}
+
+.furniture-slider .slick-next:before{
+	color : #000;
+}
+
+.furniture-slider .image .content{
+	margin: 0 auto;
+}
+
