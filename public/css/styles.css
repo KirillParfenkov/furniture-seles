@@ -82,7 +82,12 @@ nav .menu a:visited {
 	color : #000;
 }
 
-.furniture-slider .image .content{
+.furniture-slider .image .content img {
 	margin: 0 auto;
+}
+
+.furniture-view .description {
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 

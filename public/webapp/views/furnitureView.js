@@ -22,7 +22,7 @@ define([
 						$('.furniture-slider').unslick();
 						$('.furniture-slider').slick({
 							dots : true,
-							speed : 100,
+							speed : 500,
 							slidesToScroll: 1,
 						});
 					}

@@ -1,4 +1,9 @@
-<div>
+<div class="furniture-view">
+	<div class="description">
+		<hr>
+		<%= furniture.description %>
+		<hr>
+	</div>
 	<% if ( furniture ) { %>
 		<h1><%= furniture.label %></h1>
 		<% if ( furniture.images && (furniture.images.length > 0)) { %>
