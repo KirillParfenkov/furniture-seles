@@ -30,7 +30,7 @@ var deleteRequest = 'DELETE FROM ?? WHERE id = ?';
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(serveStatic('public'));
-app.use(serveStatic('d:\\Work Space\\workspace6\\simpleJ\\files'));
+app.use(serveStatic('/home/parf/Work/Lynx/files'));
 app.use(methodOverride());
 app.use(function(req, res, next) {
 	res.header('Access-Control-Allow-Credentials', true);
